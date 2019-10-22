@@ -59,7 +59,7 @@ class Transaction:
         message_str = json.dumps(self._get_sign_message(), separators=(",", ":"), sort_keys=True)
         message_bytes = message_str.encode("utf-8")
 
-        privkey = SigningKey.from_string(self.privkey.decode("hex"), SECP256k1)
+        privkey = SigningKey.from_string(self.privkey.decode("hex"), curve=SECP256k1)
         signature_compact = privkey.sign(message_bytes, hashfunc=hashlib.sha256)
 
         signature_base64_str = base64.b64encode(signature_compact).decode("utf-8")
